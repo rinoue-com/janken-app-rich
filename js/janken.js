@@ -75,12 +75,11 @@ function play(player_hand) {
         localStorage.setItem('loseScore', loseScore);
     }
 
-    $("#popup").fadeIn();
-    updateScore();
+    $("#popup").fadeIn(500);
 }
 
 // ボタンが押されたとき
-$('.hands li').click(function () {
+$('#main_hands li').click(function () {
     const player_hand = $(this).attr('id'); // .clickが1つになるように工夫
     console.log("player: " + player_hand);
     play(player_hand);
@@ -89,7 +88,7 @@ $('.hands li').click(function () {
 $('#popup-content-aiko .hands li').click(function () {
     const player_hand = $(this).attr('id'); // .clickが1つになるように工夫
     console.log("player: " + player_hand);
-    $("#popup").hide(1000, function(){
+    $("#popup").hide(500, function(){
         play(player_hand);
       });
 });
@@ -105,6 +104,7 @@ $('.close-btn').click(function () {
     loseEffect.style.display = 'none';
 
     clearTimeout(showEffectTimeount);
+    updateScore()
 });
 
 // ポップアップの背景をクリックしたときは、エフェクトを消す
@@ -118,6 +118,7 @@ $('#win-effect, #lose-effect').click(function () {
     $("#judgment").html(result_message);
 
     clearTimeout(showEffectTimeount);
+    updateScore()
 });
 
 // リセットボタン
@@ -162,6 +163,7 @@ function showEffect(effectElement, message) {
     showEffectTimeount = setTimeout(() => {
         $("#judgment").html(message);
         effectElement.style.display = 'none';
+        updateScore()
     }, 4000);  // 2秒後にエフェクトを非表示にする
 }
 
